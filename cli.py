@@ -1,5 +1,7 @@
 import argparse
 
+from app import plotter
+
 
 class ModeMapper:
     def __init__(self) -> None:
@@ -7,11 +9,11 @@ class ModeMapper:
 
     @staticmethod
     def run(args) -> None:
-        pass
+        plotter()
 
     @staticmethod
     def test(args) -> None:
-        pass
+        plotter()
 
 
 if __name__ == '__main__': # pragma: no cover
