@@ -95,16 +95,16 @@ def run(args) -> None:
         # centroid
         (main_gdf.centroid, main_gdf, {}),
         # buffer
-        (main_gdf.buffer, main_gdf, {"distance": modifier * 1e-1, "resolution": 16}),
+        (main_gdf.buffer, main_gdf, {"distance": modifier * 1e-1}),
         (
             main_gdf.buffer,
             main_gdf,
-            {"distance": modifier * 5e-2, "resolution": 16, "cap_style": 3},
+            {"distance": modifier * 5e-2},
         ),
         (
             main_gdf.buffer,
             main_gdf,
-            {"distance": modifier * 2e-2, "resolution": 16, "join_style": 2},
+            {"distance": modifier * 2e-2},
         ),
         # affine transform
         (main_gdf.affine_transform, main_gdf, {"matrix": [1, 2, 1, 3, 4, 1]}),
@@ -123,8 +123,16 @@ def run(args) -> None:
         (main_gdf.skew, main_gdf, {"xs": 15, "ys": 30, "origin": "center"}),
         (main_gdf.skew, main_gdf, {"xs": 30, "ys": 30, "origin": "center"}),
         # translate
-        (main_gdf.translate, main_gdf, {"xoff": modifier, "yoff": modifier}),
-        (main_gdf.translate, main_gdf, {"xoff": modifier, "yoff": modifier}),
+        (
+            main_gdf.translate,
+            main_gdf,
+            {"xoff": 0, "yoff": -main_gdf.centroid.y.iloc[0]},
+        ),
+        (
+            main_gdf.translate,
+            main_gdf,
+            {"xoff": -main_gdf.centroid.x.iloc[0], "yoff": 0},
+        ),
         (
             main_gdf.translate,
             main_gdf,
