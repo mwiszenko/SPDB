@@ -4,11 +4,10 @@ from tqdm import tqdm
 import geopandas as gpd
 from shapely.geometry import Point
 import matplotlib.pyplot as plt
-import os
 import math
 
+from utils import save_df_to_file, save_current_plot_to_file
 
-SCRIPT_DIR = os.path.dirname(__file__)
 IMG_DIR = "img"
 CSV_DIR = "csv"
 
@@ -41,32 +40,10 @@ def transform_and_save(
     fig.suptitle(f"{transformation_name}: {transformation_params}")
 
     # Save and close
-    save_current_plot_to_file(f"{output_dir}/{IMG_DIR}/{transformation_name}", str(index))
+    save_current_plot_to_file(
+        f"{output_dir}/{IMG_DIR}/{transformation_name}", str(index)
+    )
     plt.close(fig)
-
-
-def save_current_plot_to_file(output_directory: str, file_name: str) -> None:
-    target_dir: str = os.path.join(SCRIPT_DIR, output_directory)
-
-    # validate if directory exists
-    if not os.path.isdir(target_dir):
-        os.makedirs(target_dir)
-
-    # Save the current plot as png
-    plt.savefig(f"{target_dir}/{file_name}.png")
-
-
-def save_df_to_file(
-    gdf: gpd.GeoDataFrame, output_directory: str, file_name: str
-) -> None:
-    target_dir: str = os.path.join(SCRIPT_DIR, output_directory)
-
-    # validate if directory exists
-    if not os.path.isdir(target_dir):
-        os.makedirs(target_dir)
-
-    # Save the dataframe as csv
-    gdf.to_csv(f"{target_dir}/{file_name}.csv", index=False)
 
 
 def run(args) -> None:

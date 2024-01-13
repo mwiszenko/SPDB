@@ -1,7 +1,7 @@
 import argparse
 
 from run import run
-from analyse import analyse
+from analyse import analyse, FUNCTION_MAPPING
 
 
 def positive_int(arg: str):
@@ -73,8 +73,11 @@ if __name__ == "__main__":  # pragma: no cover
     analysis_mode.add_argument(
         "-si", "--shape_increment", type=non_negative_int, default=10
     )
-    analysis_mode.add_argument("-it", "--iterations", type=positive_int, default=100)
+    analysis_mode.add_argument("-it", "--iterations", type=positive_int, default=20)
     analysis_mode.add_argument("-o", "--output_dir", type=str, default="output")
+    analysis_mode.add_argument(
+        "-gm", "--generation_mode", choices=FUNCTION_MAPPING.keys(), default="regular"
+    )
 
     arguments = parser.parse_args()
     arguments.func(arguments)
