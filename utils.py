@@ -75,17 +75,6 @@ def save_current_plot_to_file(output_directory: str, file_name: str) -> None:
     plt.savefig(f"{target_dir}/{file_name}.png")
 
 
-def save_current_plot_to_file(output_directory: str, file_name: str) -> None:
-    target_dir: str = os.path.join(SCRIPT_DIR, output_directory)
-
-    # validate if directory exists
-    if not os.path.isdir(target_dir):
-        os.makedirs(target_dir)
-
-    # Save the current plot as png
-    plt.savefig(f"{target_dir}/{file_name}.png")
-
-
 def save_df_to_file(
     gdf: gpd.GeoDataFrame, output_directory: str, file_name: str
 ) -> None:
