@@ -26,8 +26,8 @@ def create_random_polygon(num_vertices: int) -> gpd.GeoDataFrame:
 
 def create_regular_polygon(
     num_vertices: int,
-    center_limit: Tuple[float] = (-10, 10),
-    radius_limit: Tuple[float] = (1, 100),
+    center_limit: Tuple[float] = (-100, 100),
+    radius_limit: Tuple[float] = (1, 1000),
 ) -> Polygon:
     # Generate random center coordinates within the specified range
     center: Tuple[float, float] = (
@@ -54,7 +54,7 @@ def create_regular_polygon(
     return polygon
 
 
-FUNCTION_MAPPING: Dict[str, Callable[[], str]] = {
+FUNCTION_MAPPING: Dict[str, Callable] = {
     "random": create_random_polygon,
     "regular": create_regular_polygon,
 }

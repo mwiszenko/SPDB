@@ -74,6 +74,7 @@ if __name__ == "__main__":  # pragma: no cover
         "-si", "--shape_increment", type=non_negative_int, default=10
     )
     analysis_mode.add_argument("-it", "--iterations", type=positive_int, default=20)
+    analysis_mode.add_argument("-agg", "--aggregations", type=positive_int, default=5)
     analysis_mode.add_argument("-o", "--output_dir", type=str, default="output")
     analysis_mode.add_argument(
         "-gm", "--generation_mode", choices=FUNCTION_MAPPING.keys(), default="regular"

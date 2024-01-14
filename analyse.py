@@ -42,12 +42,15 @@ def analyse(args) -> None:
             ]
         )
 
-        # Measure execution time
-        start_time: float = time.time()
-        gdf.unary_union
-        end_time: float = time.time()
-        execution_time: float = end_time - start_time
-        execution_times.append(execution_time)
+        # Measure average execution time
+        single_execution_times: List[float] = []
+        for i in range(args.aggregations):
+            start_time: float = time.time()
+            gdf.unary_union
+            end_time: float = time.time()
+            execution_time: float = end_time - start_time
+            single_execution_times.append(execution_time)
+        execution_times.append(sum(single_execution_times) / len(single_execution_times))
 
     # Plot the results
     total_vertices: List[int] = [t[0] * t[1] for t in input_params]
