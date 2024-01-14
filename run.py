@@ -69,6 +69,7 @@ def run(args) -> None:
     )
     save_df_to_file(main_gdf.to_wkt(), f"{args.output_dir}/{CSV_DIR}", "wkt")
 
+    # Map to plain coordinate reference system
     main_gdf = main_gdf.to_crs(epsg=3857)
     secondary_gdf = secondary_gdf.to_crs(epsg=3857)
 
@@ -107,10 +108,9 @@ def run(args) -> None:
             {"distance": modifier * 2e-2},
         ),
         # affine transform
-        (main_gdf.affine_transform, main_gdf, {"matrix": [1, 2, 1, 3, 4, 1]}),
-        (main_gdf.affine_transform, main_gdf, {"matrix": [2, 1, 1, 1, 1, 1]}),
-        (main_gdf.affine_transform, main_gdf, {"matrix": [3, 5, 1, 3, 3, 1]}),
-        # rotate
+        (main_gdf.affine_transform, main_gdf, {"matrix": [1, 0.5, 0, 1, 0, 0]}),
+        (main_gdf.affine_transform, main_gdf, {"matrix": [1, 0, -0.5, 1, 0, 0]}),
+        # # rotate
         (main_gdf.rotate, main_gdf, {"angle": 10, "origin": "center"}),
         (main_gdf.rotate, main_gdf, {"angle": 90, "origin": (0, 0)}),
         (main_gdf.rotate, main_gdf, {"angle": 180, "origin": Point(0, 0)}),
